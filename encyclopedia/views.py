@@ -65,6 +65,8 @@ def searchEntry(request):
                     "content" : htmlPage,
                     "searchBar": searchEntryForm()
                 })
+    else:
+        return HttpResponse(index(request))
 
 def randomPage(request):
     return HttpResponse(entry(request, util.list_entries()[randint(1,len(util.list_entries())) - 1]))
