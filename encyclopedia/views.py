@@ -70,3 +70,15 @@ def searchEntry(request):
 
 def randomPage(request):
     return HttpResponse(entry(request, util.list_entries()[randint(1,len(util.list_entries())) - 1]))
+
+def CreateNewPage(request):
+    alert = 0
+    if request.method == "POST":
+        entryTitle = request.POST["title"]
+        content = request.POST["content"]
+        util.save_entry(entryTitle, content)
+        alert = 1
+    return render(request, "encyclopedia/CreateNewPage.html", {
+            "searchBar": searchEntryForm(),
+            "alert": alert
+            })
