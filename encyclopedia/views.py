@@ -38,8 +38,8 @@ def entry(request, title):
     })
 
 def searchEntry(request):
-    if request.method == "GET":
-            entryTitle = request.GET["entryTitle"]
+    if request.method == "POST":
+            entryTitle = request.POST["entryTitle"]
             entryPage = util.get_entry(entryTitle)
             if entryPage == None:
                 listEntries = util.list_entries()
