@@ -1,0 +1,32 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    CreateNewPage
+{% endblock %}
+
+{% block searchBar %}
+    {{searchBar}}
+{% endblock %}
+
+{% block body %}
+    
+    <h1>CreateNewPage</h1>
+    <form action="{% url 'wiki:NewPage' %}" method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="InputTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="InputTitle" placeholder="Title" style="width: 20%;" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="InputContents" class="form-label">Contents</label>
+            <textarea class="form-control" id="InputContents" rows="3" style="height: 200px; width: 75%;" name="content" required></textarea>
+        </div>
+        <input type="submit" class="btn btn-primary btn-lg" value="Submit" >
+    </form>
+    {% if alert == 1 %}
+        <div class="alert alert-success" role="alert" style="margin-top: 20px;">
+            Page submitted successfully
+        </div>      
+    {% endif %}
+{% endblock %}
