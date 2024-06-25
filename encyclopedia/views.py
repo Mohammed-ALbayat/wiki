@@ -4,7 +4,7 @@ from django.shortcuts import render
 from markdown2 import Markdown
 from . import util
 from django.urls import reverse
-
+from random import randint
 class searchEntryForm(forms.Form):
     entryTitle = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Search Encyclopedia'}))
 
@@ -49,10 +49,14 @@ def searchEntry(request):
                     entry1 = entry.upper()
                     if entry1.find(entryTitle) != -1:
                         entries.append(entry)
+                if len(entries) < 1:
+                    headPage = "NO Match Results"
+                else:
+                    headPage = "You search for..."
                 return render(request, "encyclopedia/searchEntry.html", {
                     "entries": entries,
                     "searchBar": searchEntryForm(),
-                    "title": entryTitle
+                    "headPage": headPage
                     })
             else:
                 htmlPage = convert_md_to_html(entryTitle)
@@ -62,4 +66,5 @@ def searchEntry(request):
                     "searchBar": searchEntryForm()
                 })
 
-    
+def randomPage(request):
+    return HttpResponse(entry(request, util.list_entries()[randint(1,len(util.list_entries())) - 1]))

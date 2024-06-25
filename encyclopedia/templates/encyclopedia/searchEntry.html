@@ -1,7 +1,7 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    {{title}}
+    Search Encyclopedia
 {% endblock %}
 
 {% block searchBar %}
@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>You search for...</h1>
+    <h1>{{headPage}}</h1>
 
     <ul>
         {% for entry in entries %}
